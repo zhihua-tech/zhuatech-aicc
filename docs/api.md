@@ -10,3 +10,4 @@
 | GET | `/api/shopfloor/dashboard` | 智能坐席工作台 |
 | POST | `/api/shopfloor/work-orders/{id}/reports` | 提交会话处理结果 |
 | POST | `/api/shopfloor/ai-preview` | 调用可替换 AI Provider 生成回复建议 |
+| POST | `/api/shopfloor/conversation-triage` | 识别会话优先级、人工接管条件和服务时限 |

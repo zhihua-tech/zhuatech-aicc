@@ -8,5 +8,11 @@ import org.junit.jupiter.api.*; import org.springframework.beans.factory.annotat
     @Test void operatorCanReadShopfloorDashboard()throws Exception{mvc.perform(get("/api/shopfloor/dashboard").header("Authorization","Bearer "+operatorToken)).andExpect(status().isOk()).andExpect(jsonPath("$.success").value(true)).andExpect(jsonPath("$.data.metrics[0].label").value("计划处理消息"));}
     @Test void plannerCanReadWorkRecords()throws Exception{mvc.perform(get("/api/admin/work-orders").header("Authorization","Bearer "+plannerToken)).andExpect(status().isOk()).andExpect(jsonPath("$.data.length()").value(3));}
     @Test void operatorCanSubmitProductionReport()throws Exception{mvc.perform(post("/api/shopfloor/work-orders/1/reports").header("Authorization","Bearer "+operatorToken).contentType(MediaType.APPLICATION_JSON).content("{\"operationName\":\"坐席回复\",\"goodQty\":2,\"defectQty\":1,\"remark\":\"数据完整\"}")).andExpect(status().isOk()).andExpect(jsonPath("$.message").value("反馈提交成功")).andExpect(jsonPath("$.data.completedQty").value(14));}
+    @Test void operatorCanTriageHighRiskConversation()throws Exception{mvc.perform(post("/api/shopfloor/conversation-triage").header("Authorization","Bearer "+operatorToken).contentType(MediaType.APPLICATION_JSON).content("{\"message\":\"系统中断，我要立即投诉并退款\",\"sentimentScore\":-0.85,\"previousFailures\":2,\"containsCommitment\":false}"))
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.data.priority").value("P1"))
+        .andExpect(jsonPath("$.data.humanHandoff").value(true))
+        .andExpect(jsonPath("$.data.slaMinutes").value(5))
+        .andExpect(jsonPath("$.data.recommendedQueue").value("客户关怀专席"));}
     @Test void anonymousRequestIsDenied()throws Exception{mvc.perform(get("/api/admin/dashboard")).andExpect(status().isForbidden());}
 }

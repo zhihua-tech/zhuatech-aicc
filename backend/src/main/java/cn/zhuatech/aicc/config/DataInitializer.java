@@ -1,0 +1,11 @@
+/* Copyright 2026 上海如静知华信息科技有限公司 */
+package cn.zhuatech.aicc.config;
+import cn.zhuatech.aicc.model.*; import cn.zhuatech.aicc.repository.*; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder; import java.time.LocalDate; import java.util.List;
+@Configuration public class DataInitializer {
+ @Bean CommandLineRunner seed(OperatingUnitRepository units,WorkRecordRepository records,ResourceRegisterRepository resources,ReviewRecordRepository reviews,UserRepository users,PasswordEncoder encoder){return args->{if(units.count()>0)return;
+  OperatingUnit tech=units.save(new OperatingUnit("CC-TECH","售后技术支持","技术服务部",50)),sub=units.save(new OperatingUnit("CC-SUB","订阅服务队列","客户成功部",50)),vip=units.save(new OperatingUnit("CC-VIP","重点客户专席","大客户部",25));
+  WorkRecord a=records.save(new WorkRecord("CHAT-260801-6842","CUS-EAST-018","设备升级后无法连接云服务",tech,18,12,2,LocalDate.now(),WorkRecord.Status.RUNNING,"BOT-V5")); WorkRecord b=records.save(new WorkRecord("CHAT-260801-6829","CUS-SAAS-206","企业订阅续费与席位调整",sub,14,14,0,LocalDate.now(),WorkRecord.Status.COMPLETED,"BOT-V4")); WorkRecord c=records.save(new WorkRecord("CALL-260801-0421","CUS-VIP-032","服务中断投诉与补偿诉求",vip,22,16,4,LocalDate.now(),WorkRecord.Status.RELEASED,"BOT-V5"));
+  resources.saveAll(List.of(new ResourceRegister("BOT-TECH-02","技术支持机器人",tech,ResourceRegister.Status.RUNNING,96),new ResourceRegister("BOT-SUB-01","订阅服务机器人",sub,ResourceRegister.Status.RUNNING,94),new ResourceRegister("BOT-VIP-03","重点客户辅助机器人",vip,ResourceRegister.Status.ALARM,68)));
+  reviews.saveAll(List.of(new ReviewRecord("QA-260801-032",a,"专业准确性",98,2,ReviewRecord.Result.PENDING,"陆遥"),new ReviewRecord("QA-260801-011",b,"服务完整性",96,0,ReviewRecord.Result.PASSED,"叶嘉"),new ReviewRecord("QA-260728-018",c,"风险承诺",82,2,ReviewRecord.Result.FAILED,"陆遥")));
+  String demo=encoder.encode("Demo@2026"); users.saveAll(List.of(new UserAccount("operator",demo,"叶嘉",UserAccount.Role.DOMAIN_USER,"CC-TECH"),new UserAccount("planner",demo,"陆遥",UserAccount.Role.DOMAIN_OPERATOR,null),new UserAccount("quality",demo,"顾清",UserAccount.Role.QUALITY,null),new UserAccount("admin",encoder.encode("ZhuaTech@2026"),"系统管理员",UserAccount.Role.ADMIN,null)));};}
+}

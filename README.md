@@ -54,3 +54,7 @@ npm run dev:demo
 | ![知华科技微信咨询二维码一](docs/images/zhuatech-wechat-consulting.png) | ![知华科技微信咨询二维码二](docs/images/zhuatech-wechat-consulting-2.png) |
 
 SEO 关键词：AI 智能客服源码、AICC、智能联络中心、客服机器人、智能质检、坐席辅助、Java 客服系统、知华科技。
+
+## 会话质量评估
+
+新增 `POST /api/aicc/insights/conversation-quality`，综合问题解决、升级、情绪变化、合规命中和响应 SLA 生成质量分，输出 `EXCELLENT`、`COACH` 或 `REVIEW` 及质检建议。

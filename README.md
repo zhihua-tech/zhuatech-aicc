@@ -58,3 +58,7 @@ SEO 关键词：AI 智能客服源码、AICC、智能联络中心、客服机器
 ## 会话质量评估
 
 新增 `POST /api/aicc/insights/conversation-quality`，综合问题解决、升级、情绪变化、合规命中和响应 SLA 生成质量分，输出 `EXCELLENT`、`COACH` 或 `REVIEW` 及质检建议。
+
+## 企业级客服交互结案
+
+新增 `POST /api/enterprise/aicc/interaction-closure`，覆盖身份、同意、必要告知、数据脱敏、投诉、质检和录音留存，返回 `CLOSE / REVIEW / BLOCKED`。详见 [交互结案说明](docs/ENTERPRISE_INTERACTION_CLOSURE.md)。

@@ -62,3 +62,7 @@ SEO 关键词：AI 智能客服源码、AICC、智能联络中心、客服机器
 ## 企业级客服交互结案
 
 新增 `POST /api/enterprise/aicc/interaction-closure`，覆盖身份、同意、必要告知、数据脱敏、投诉、质检和录音留存，返回 `CLOSE / REVIEW / BLOCKED`。详见 [交互结案说明](docs/ENTERPRISE_INTERACTION_CLOSURE.md)。
+
+## SLA 计时与风险升级
+
+`POST /api/enterprise/aicc/sla-escalation` 对语音、在线聊天、邮件和社交会话统一计算 SLA 使用率与剩余时限，并结合投诉、负向情绪、重点客户、监管事项和安全风险路由到普通、优先、班长、合规或安全队列。详见 [SLA 升级说明](docs/ENTERPRISE_SLA_ESCALATION.md)。

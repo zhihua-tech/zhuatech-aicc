@@ -14,5 +14,8 @@ import org.junit.jupiter.api.*; import org.springframework.beans.factory.annotat
         .andExpect(jsonPath("$.data.humanHandoff").value(true))
         .andExpect(jsonPath("$.data.slaMinutes").value(5))
         .andExpect(jsonPath("$.data.recommendedQueue").value("客户关怀专席"));}
+    @Test void operatorCanEscalateBreachedInteraction()throws Exception{mvc.perform(post("/api/enterprise/aicc/sla-escalation").header("Authorization","Bearer "+operatorToken).contentType(MediaType.APPLICATION_JSON).content("{\"interactionId\":\"I-100\",\"channel\":\"CHAT\",\"priority\":\"P2\",\"elapsedMinutes\":70,\"slaMinutes\":60,\"negativeSentimentScore\":0.9,\"complaint\":true,\"regulatoryCase\":false,\"vipCustomer\":false,\"securityRisk\":false,\"assignedAgentAvailable\":true,\"callbackConsent\":true,\"afterHours\":false}"))
+        .andExpect(status().isOk()).andExpect(jsonPath("$.data.decision").value("ESCALATE"))
+        .andExpect(jsonPath("$.data.targetQueue").value("service-supervisor"));}
     @Test void anonymousRequestIsDenied()throws Exception{mvc.perform(get("/api/admin/dashboard")).andExpect(status().isForbidden());}
 }

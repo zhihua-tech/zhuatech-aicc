@@ -11,9 +11,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-/** 对客户消息做可解释的优先级分流，并明确何时必须转人工。 */
+/**
+ * 对客户消息做可解释的优先级分流，并明确何时必须转人工。
+ *
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class ConversationTriageService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public TriageResult triage(TriageRequest request) {
         String message = request.message().toLowerCase(Locale.ROOT);
         List<String> reasons = new ArrayList<>();
@@ -34,11 +41,17 @@ public class ConversationTriageService {
         return new TriageResult(priority, handoff, slaMinutes, queue, List.copyOf(reasons), guidance);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private boolean containsAny(String text, String... keywords) {
         for (String keyword : keywords) if (text.contains(keyword)) return true;
         return false;
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record TriageRequest(
         @NotBlank(message = "请输入客户消息") String message,
         @DecimalMin(value = "-1.0", message = "情绪分值不能小于 -1")
@@ -47,6 +60,9 @@ public class ConversationTriageService {
         boolean containsCommitment
     ) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record TriageResult(
         String priority,
         boolean humanHandoff,

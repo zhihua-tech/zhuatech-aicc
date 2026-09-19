@@ -1,7 +1,13 @@
 /* Copyright 2026 上海如静知华信息科技有限公司 · https://www.zhuatech.cn/ */
 package cn.zhuatech.aicc.config;
 import cn.zhuatech.aicc.model.*; import cn.zhuatech.aicc.repository.*; import org.springframework.boot.CommandLineRunner; import org.springframework.context.annotation.*; import org.springframework.security.crypto.password.PasswordEncoder; import java.time.LocalDate; import java.util.List;
+/**
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Configuration public class DataInitializer {
+ /**
+  * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+  */
  @Bean CommandLineRunner seed(OperatingUnitRepository units,WorkRecordRepository records,ResourceRegisterRepository resources,ReviewRecordRepository reviews,UserRepository users,PasswordEncoder encoder){return args->{if(units.count()>0)return;
   OperatingUnit tech=units.save(new OperatingUnit("CC-TECH","售后技术支持","技术服务部",50)),sub=units.save(new OperatingUnit("CC-SUB","订阅服务队列","客户成功部",50)),vip=units.save(new OperatingUnit("CC-VIP","重点客户专席","大客户部",25));
   WorkRecord a=records.save(new WorkRecord("CHAT-260801-6842","CUS-EAST-018","设备升级后无法连接云服务",tech,18,12,2,LocalDate.now(),WorkRecord.Status.RUNNING,"BOT-V5")); WorkRecord b=records.save(new WorkRecord("CHAT-260801-6829","CUS-SAAS-206","企业订阅续费与席位调整",sub,14,14,0,LocalDate.now(),WorkRecord.Status.COMPLETED,"BOT-V4")); WorkRecord c=records.save(new WorkRecord("CALL-260801-0421","CUS-VIP-032","服务中断投诉与补偿诉求",vip,22,16,4,LocalDate.now(),WorkRecord.Status.RELEASED,"BOT-V5"));

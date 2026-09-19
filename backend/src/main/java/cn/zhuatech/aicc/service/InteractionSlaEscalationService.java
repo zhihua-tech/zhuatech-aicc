@@ -12,9 +12,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
-/** 对全渠道客服交互执行 SLA 计时、风险升级和承接队列决策。 */
+/**
+ * 对全渠道客服交互执行 SLA 计时、风险升级和承接队列决策。
+ *
+ * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+ */
 @Service
 public class InteractionSlaEscalationService {
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public EscalationResult evaluate(EscalationRequest request) {
         double utilization = round(request.elapsedMinutes() * 100d / request.slaMinutes());
         int remainingMinutes = Math.max(0, request.slaMinutes() - request.elapsedMinutes());
@@ -59,12 +66,18 @@ public class InteractionSlaEscalationService {
         return result(Decision.MONITOR, channelQueue(request.channel()), utilization, remainingMinutes, reasons, actions);
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private EscalationResult result(Decision decision, String queue, double utilization, int remainingMinutes,
                                     List<String> reasons, List<String> actions) {
         return new EscalationResult(decision, queue, utilization, remainingMinutes,
                 List.copyOf(reasons), List.copyOf(actions));
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private String channelQueue(Channel channel) {
         return switch (channel) {
             case VOICE -> "voice-service";
@@ -74,10 +87,16 @@ public class InteractionSlaEscalationService {
         };
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     private double round(double value) {
         return Math.round(value * 100d) / 100d;
     }
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record EscalationRequest(
             @NotBlank String interactionId,
             @NotNull Channel channel,
@@ -94,10 +113,22 @@ public class InteractionSlaEscalationService {
             boolean afterHours
     ) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public record EscalationResult(Decision decision, String targetQueue, double slaUtilizationPercent,
                                    int remainingMinutes, List<String> reasons, List<String> actions) {}
 
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public enum Channel { VOICE, CHAT, EMAIL, SOCIAL }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public enum Priority { P1, P2, P3, P4 }
+    /**
+     * 商业授权或定制开发请微信添加微信号zhuatech或zhuatech2进行咨询。
+     */
     public enum Decision { MONITOR, PRIORITIZE, ESCALATE, EMERGENCY }
 }

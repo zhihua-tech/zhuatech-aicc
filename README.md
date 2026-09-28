@@ -1,5 +1,7 @@
 # ZhuaTech AICC｜知华科技 AI 智能客服与联络中心
 
+[简体中文](README.md) | [English](README.en.md)
+
 让 AI 负责理解、检索和建议，让服务人员专注解决真正的客户问题。
 
 知华科技（上海如静知华信息科技有限公司）官网：[https://www.zhuatech.cn/](https://www.zhuatech.cn/)

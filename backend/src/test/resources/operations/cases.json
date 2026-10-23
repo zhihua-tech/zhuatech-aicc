@@ -1,0 +1,65 @@
+[
+  {
+    "patch": {},
+    "expected": {
+      "decision": "HOLD",
+      "wholeCallCapacity": "#450",
+      "uncoveredCalls": "#50"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "expectedCalls": "450"
+    },
+    "expected": {
+      "decision": "PASS"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "shrinkage": "100"
+    },
+    "expected": {
+      "wholeCallCapacity": "#0"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "agents": "0"
+    },
+    "expected": {
+      "uncoveredCalls": "#500"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "talkMinutes": "0"
+    },
+    "expected": {},
+    "error": true
+  },
+  {
+    "patch": {
+      "expectedCalls": "0",
+      "agents": "0"
+    },
+    "expected": {
+      "decision": "PASS"
+    },
+    "error": false
+  },
+  {
+    "patch": {
+      "wrapMinutes": "0"
+    },
+    "expected": {
+      "wholeCallCapacity": "#600",
+      "decision": "PASS"
+    },
+    "error": false
+  }
+]
